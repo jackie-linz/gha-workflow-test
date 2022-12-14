@@ -58,3 +58,25 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
+        
+  Frontend-build-and-push-image:
+    name: Frontend Build and Push Container
+    if: (inputs.frontendDisable == false) && always()
+    needs: [IntegrationTest]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+
+  Backend-build-and-push-image:
+    name: Backend Build and Push Container
+    if: (inputs.backendDisable == false) && ( inputs.backendImageTag != '' ) && always()
+    needs: [IntegrationTest]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
