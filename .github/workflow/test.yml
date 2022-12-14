@@ -48,3 +48,13 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
+
+  IntegrationTest:
+    if: (inputs.e2eDisable == false) && always()
+    needs: [  BackendBuild, FrontendBuild]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
