@@ -1,0 +1,50 @@
+name: workflow test
+on:
+  push:
+    branches: [ feat/github-action ]
+  workflow_call:
+    inputs:
+      backendDisable:
+        required: false
+        type: boolean
+        default: false
+      frontendDisable:
+        required: false
+        type: boolean
+        default: false
+      e2eDisable:
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  Setup:
+    name: Setup
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+
+  BackendBuild:
+    name: Backend build
+    if: inputs.backendDisable  == false
+    needs: [Setup]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
+
+  FrontendBuild:
+    name: Backend build
+    if: inputs.frontendDisable  == false
+    needs: [Setup]
+    runs-on: ubuntu-latest
+    steps:
+    - name: Sleep for 10 seconds
+      uses: jakejarvis/wait-action@master
+      with:
+        time: '10s'
