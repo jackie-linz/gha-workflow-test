@@ -68,7 +68,7 @@ jobs:
         
   Frontend-build-and-push-image:
     name: Frontend Build and Push Container
-    if: (inputs.frontendDisable == false) && always()
+    if: (inputs.frontendDisable == false) && !failure()
     needs: [IntegrationTest]
     runs-on: ubuntu-latest
     steps:
@@ -79,7 +79,7 @@ jobs:
 
   Backend-build-and-push-image:
     name: Backend Build and Push Container
-    if: inputs.backendDisable == false && always()
+    if: inputs.backendDisable == false && !failure()
     needs: [IntegrationTest]
     runs-on: ubuntu-latest
     steps:
