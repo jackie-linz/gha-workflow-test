@@ -16,10 +16,6 @@ on:
         required: false
         type: boolean
         default: false
-      e2eSimulateFailure:
-        required: false
-        type: boolean
-        default: false
 
 jobs:
   Setup:
@@ -54,7 +50,7 @@ jobs:
         time: '10s'
 
   IntegrationTest:
-    if: (inputs.e2eDisable == false) && always()
+    if: false
     needs: [  BackendBuild, FrontendBuild]
     runs-on: ubuntu-latest
     steps:
@@ -62,9 +58,8 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
-    - run: |
-        [[ "${{ inputs.e2eSimulateFailure }}" = true ]] && exit 1
-      shell: bash
+    # - run: exit 1
+    #   shell: bash
         
   Frontend-build-and-push-image:
     name: Frontend Build and Push Container
